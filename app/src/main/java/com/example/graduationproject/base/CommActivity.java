@@ -9,7 +9,7 @@ import com.example.graduationproject.util.ToastUtils;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class CommActvity extends BaseFragmentActivity {
+public abstract class CommActivity extends BaseFragmentActivity {
     private Unbinder unbinder;
 
     @Override
