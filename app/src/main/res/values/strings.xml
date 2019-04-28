@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GraduationProject</string>
+
+    <string name="cart">购物车</string>
+    <string name="all">全选</string>
+    <string name="order_total">合计 :</string>
+    <string name="edit">编辑</string>
+    <string name="finish">完成</string>
 </resources>

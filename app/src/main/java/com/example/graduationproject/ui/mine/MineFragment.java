@@ -8,7 +8,7 @@ import com.example.graduationproject.R;
 import com.example.graduationproject.base.CommFragment;
 
 public class MineFragment extends CommFragment {
-    public static MineFragment getMine(){
+    public static MineFragment getMineView(){
         MineFragment mineFragment=new MineFragment();
         return mineFragment;
     }

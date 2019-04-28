@@ -6,6 +6,9 @@ import android.widget.RadioGroup;
 import com.example.graduationproject.R;
 import com.example.graduationproject.base.BaseFragment;
 import com.example.graduationproject.base.CommActivity;
+import com.example.graduationproject.ui.cart.CartFragment;
+import com.example.graduationproject.ui.index.IndexFragment;
+import com.example.graduationproject.ui.mine.MineFragment;
 
 public class MainActivity extends CommActivity {
 
@@ -18,6 +21,9 @@ public class MainActivity extends CommActivity {
     @Override
     public void initView() {
         setFragmentContainerId(R.id.container1);
+        indexFragment= IndexFragment.getIndexView();
+        cartFragment= CartFragment.getCartView();
+        mineFragment= MineFragment.getMineView();
         ((RadioGroup)findViewById(R.id.main_rg)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
