@@ -12,9 +12,16 @@ import android.widget.Toast;
 
 import com.example.graduationproject.R;
 import com.example.graduationproject.base.CommActivity;
+import com.example.graduationproject.util.ApiServiceUtil;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends CommActivity {
     @BindView(R.id.to_login)
@@ -161,7 +168,32 @@ public class RegisterActivity extends CommActivity {
                     /**
                      * 发起注册的网络请求
                      */
+                    ApiServiceUtil.getService().register(username,password,name,telephone).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            try {
+                                String s=response.body().string();
+                                if("0".equals(s)){
+                                    showToast("注册失败，用户名已存在。");
+                                }else if("1".equals(s)){
+                                    showToast("注册成功，即将前往登录。");
+                                    Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        }
+                    });
                 }
+                break;
 
         }
     }

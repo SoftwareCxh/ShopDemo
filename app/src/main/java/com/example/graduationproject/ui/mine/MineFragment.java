@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.graduationproject.R;
 import com.example.graduationproject.base.CommFragment;
+import com.example.graduationproject.base.Constant;
 import com.example.graduationproject.ui.LoginActivity;
 import com.youth.banner.loader.ImageLoader;
 
@@ -17,6 +19,8 @@ import butterknife.BindView;
 public class MineFragment extends CommFragment {
     @BindView(R.id.head_iv)
     ImageView iv_head;
+    @BindView(R.id.name_tv)
+    TextView tv_name;
 
     public static MineFragment getMineView(){
         MineFragment mineFragment=new MineFragment();
@@ -36,8 +40,12 @@ public class MineFragment extends CommFragment {
                 Intent intent=new Intent();
                 intent.setClass(getContext(), LoginActivity.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
+        if(Constant.login){
+            tv_name.setText(Constant.name);
+        }
     }
 
     @Override
