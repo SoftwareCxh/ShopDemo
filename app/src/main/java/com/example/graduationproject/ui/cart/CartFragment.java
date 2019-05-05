@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import com.example.graduationproject.R;
 import com.example.graduationproject.base.CommFragment;
+import com.example.graduationproject.base.Constant;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class CartFragment extends CommFragment {
+public class CartFragment extends CommFragment implements CartContract.View {
     @BindView(R.id.actionBar_edit)
     TextView tv_edit;
     @BindView(R.id.all_checkBox)
@@ -27,7 +28,7 @@ public class CartFragment extends CommFragment {
     LinearLayout ll_orderInfo;
     @BindView(R.id.share_info)
     LinearLayout ll_shareInfo;
-
+    CartPresenter cartPresenter;
 
     //false就是编辑，ture就是完成
     private boolean flag = false;
@@ -48,7 +49,8 @@ public class CartFragment extends CommFragment {
 
     @Override
     public void initPresenter() {
-
+        cartPresenter=new CartPresenter(this);
+        cartPresenter.getData(Constant.username);
     }
 
     @OnClick({R.id.actionBar_edit})

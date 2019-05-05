@@ -16,12 +16,12 @@ import com.youth.banner.loader.ImageLoader;
 
 import butterknife.BindView;
 
-public class MineFragment extends CommFragment {
+public class MineFragment extends CommFragment implements MineContract.View{
     @BindView(R.id.head_iv)
     ImageView iv_head;
     @BindView(R.id.name_tv)
     TextView tv_name;
-
+    MinePresenter minePresenter;
     public static MineFragment getMineView(){
         MineFragment mineFragment=new MineFragment();
         return mineFragment;
@@ -50,6 +50,7 @@ public class MineFragment extends CommFragment {
 
     @Override
     public void initPresenter() {
+        minePresenter=new MinePresenter(this);
 
     }
 }

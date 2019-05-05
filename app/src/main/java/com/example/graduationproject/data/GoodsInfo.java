@@ -2,10 +2,20 @@ package com.example.graduationproject.data;
 
 public class GoodsInfo {
     private int id;
-    private String goodsName;
-    private String goodsImage;
-    private double goodsPrice;
+    private String name;
+    private String image;
+    private double price;
     private int goodsNum = 1;
+    private String resume;
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
     private boolean isChoosed=false;
 
     public boolean isChoosed() {
@@ -43,26 +53,26 @@ public class GoodsInfo {
     }
 
     public String getGoodsName() {
-        return goodsName;
+        return name;
     }
 
     public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
+        this.name = goodsName;
     }
 
     public String getGoodsImage() {
-        return goodsImage;
+        return image;
     }
 
     public void setGoodsImage(String goodsImage) {
-        this.goodsImage = goodsImage;
+        this.image = goodsImage;
     }
 
     public String getGoodsPrice() {
-        return "¥" + goodsPrice;
+        return "¥" + price;
     }
 
     public void setGoodsPrice(double goodsPrice) {
-        this.goodsPrice = goodsPrice;
+        this.price = goodsPrice;
     }
 }

@@ -1,43 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/refresh">
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.design.widget.AppBarLayout
+    android:id="@+id/refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:background="@color/white"
-            app:elevation="0dp">
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:indicator_width="10dp"
-                app:indicator_height="10dp"
-                app:indicator_margin="5dp"
-                app:image_scale_type="center_inside"
-                app:indicator_drawable_selected="@drawable/shape_selected_radius"
-                app:indicator_drawable_unselected="@drawable/shape_unselected_radius"
-                >
-            </com.youth.banner.Banner>
-            <TextView
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="热卖商品"
-                android:textSize="15dp"
-                android:layout_margin="5dp"/>
-        </android.support.design.widget.AppBarLayout>
-        <ListView
-            android:id="@+id/goods_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
-    </android.support.design.widget.CoordinatorLayout>
+                android:background="@color/white"
+                android:fitsSystemWindows="true"
+                app:elevation="0dp">
 
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:image_scale_type="center_inside"
+                    app:indicator_drawable_selected="@drawable/shape_selected_radius"
+                    app:indicator_drawable_unselected="@drawable/shape_unselected_radius"
+                    app:indicator_height="10dp"
+                    app:indicator_margin="5dp"
+                    app:indicator_width="10dp"
+                    ></com.youth.banner.Banner>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="热卖商品"
+                    android:textSize="15dp"
+                    />
+            </android.support.design.widget.AppBarLayout>
+
+            <GridView
+                android:id="@+id/goods_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:horizontalSpacing="10dp"
+                android:numColumns="2"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="10dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"></GridView>
+        </android.support.design.widget.CoordinatorLayout>
 
 
 
