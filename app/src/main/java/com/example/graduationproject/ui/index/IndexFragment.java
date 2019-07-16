@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
 
 import com.example.graduationproject.R;
 import com.example.graduationproject.base.CommFragment;
-import com.example.graduationproject.data.Api;
 import com.example.graduationproject.data.GoodsInfo;
 import com.example.graduationproject.util.ApiServiceUtil;
 import com.example.graduationproject.util.GlideImageLoader;
@@ -21,23 +19,23 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
 
 public class IndexFragment extends CommFragment implements IndexContract.View{
 
-    //    @BindView(R.id.banner)
-//    Banner banner;
+    @BindView(R.id.banner)
+    Banner banner;
     @BindView(R.id.goods_list)
     GridView listView;
     @BindView(R.id.refresh)
     SwipeRefreshLayout swipeRefreshLayout;
     GoodsPop goodsPop;
     List<GoodsInfo> list;
+    List<GoodsInfo> bannerList;
     List<String> image;
     ListAdapter listAdapter;
 
@@ -54,13 +52,7 @@ public class IndexFragment extends CommFragment implements IndexContract.View{
 
     @Override
     protected void initView(LayoutInflater inflater, @Nullable ViewGroup container) {
-        // startBanner();
-//        banner.setOnBannerListener(new OnBannerListener() {
-//            @Override
-//            public void OnBannerClick(int i) {
-//
-//            }
-//        });
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -108,30 +100,48 @@ public class IndexFragment extends CommFragment implements IndexContract.View{
     }
 
     @Override
+    public void setBanner(List<GoodsInfo> body) {
+        bannerList=body;
+        image=new ArrayList<>();
+        for(GoodsInfo goodsInfo:bannerList){
+            image.add(ApiServiceUtil.BaseUrl+goodsInfo.getGoodsImage());
+        }
+        startBanner();
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int i) {
+                goodsPop=new GoodsPop(getContext(),bannerList.get(i));
+                goodsPop.show();
+            }
+        });
+    }
+
+    @Override
     public void initPresenter() {
         indexPresenter =new IndexPresenter(this);
         indexPresenter.getData();
+
     }
 
 
-//    private void startBanner() {
-//        //设置banner样式(显示圆形指示器)
-//        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-//        //设置指示器位置（指示器居右）
-//        banner.setIndicatorGravity(BannerConfig.RIGHT);
-//        //设置图片加载器
-//        banner.setImageLoader(new GlideImageLoader());
-//        //设置图片集合
-//        banner.setImages(image);
-//        //设置banner动画效果
-//        banner.setBannerAnimation(Transformer.DepthPage);
-//        //设置标题集合（当banner样式有显示title时）
-////        banner.setBannerTitles(titles);
-//        //设置自动轮播，默认为true
-//        banner.isAutoPlay(true);
-//        //设置轮播时间
-//        banner.setDelayTime(5000);
-//        //banner设置方法全部调用完毕时最后调用
-//        banner.start();
-//    }
+    private void startBanner() {
+        //设置banner样式(显示圆形指示器)
+        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        //设置指示器位置（指示器居右）
+        banner.setIndicatorGravity(BannerConfig.RIGHT);
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        banner.setImages(image);
+        //设置banner动画效果
+        banner.setBannerAnimation(Transformer.DepthPage);
+        //设置标题集合（当banner样式有显示title时）
+//        banner.setBannerTitles(titles);
+        //设置自动轮播，默认为true
+        banner.isAutoPlay(true);
+        //设置轮播时间
+        banner.setDelayTime(5000);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
+    }
 }

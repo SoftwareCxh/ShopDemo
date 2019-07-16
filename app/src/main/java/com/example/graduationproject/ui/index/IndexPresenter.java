@@ -29,5 +29,16 @@ public class IndexPresenter implements IndexContract.Presenter {
                 view.showToast("网络请求失败");
             }
         });
+        ApiServiceUtil.getService().getBanner().enqueue(new Callback<List<GoodsInfo>>() {
+            @Override
+            public void onResponse(Call<List<GoodsInfo>> call, Response<List<GoodsInfo>> response) {
+                view.setBanner(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<GoodsInfo>> call, Throwable t) {
+                view.showToast("网络请求失败");
+            }
+        });
     }
 }

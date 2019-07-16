@@ -16,14 +16,17 @@ import com.youth.banner.loader.ImageLoader;
 
 import butterknife.BindView;
 
-public class MineFragment extends CommFragment implements MineContract.View{
+public class MineFragment extends CommFragment implements MineContract.View {
     @BindView(R.id.head_iv)
     ImageView iv_head;
     @BindView(R.id.name_tv)
     TextView tv_name;
     MinePresenter minePresenter;
-    public static MineFragment getMineView(){
-        MineFragment mineFragment=new MineFragment();
+    @BindView(R.id.all)
+    TextView all;
+
+    public static MineFragment getMineView() {
+        MineFragment mineFragment = new MineFragment();
         return mineFragment;
     }
 
@@ -33,24 +36,42 @@ public class MineFragment extends CommFragment implements MineContract.View{
     }
 
     @Override
-    protected void initView(LayoutInflater inflater, @Nullable ViewGroup container) {
+    protected void initView(final LayoutInflater inflater, @Nullable ViewGroup container) {
+
         iv_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.setClass(getContext(), LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                if (!Constant.login) {
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
             }
         });
-        if(Constant.login){
+
+        if (Constant.login) {
             tv_name.setText(Constant.name);
         }
+
+        all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Constant.login) {
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), OrderDetail.class);
+                    startActivity(intent);
+                }else{
+                    showToast("请先登录");
+                }
+
+            }
+        });
     }
 
     @Override
     public void initPresenter() {
-        minePresenter=new MinePresenter(this);
+        minePresenter = new MinePresenter(this);
 
     }
 }

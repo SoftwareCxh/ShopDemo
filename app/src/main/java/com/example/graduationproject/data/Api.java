@@ -19,25 +19,32 @@ public interface Api {
     @POST("/get")
     Call<User> get(@Query("username")String username);
 
+    @GET("/getGoodsList")
+    Call<List<GoodsInfo>> getGoodsList();
 
+    @GET("/getBannerGoods")
+    Call<List<GoodsInfo>> getBanner();
+
+
+    @GET("/getCart")
+    Call<List<GoodsInfo>> getCartGoods(@Query("username")String username);
+
+    @POST("/deleteCartGoods")
+    Call<ResponseBody> deletCartGoods(@Query("id")int id);
+
+    @POST("/addCartGoods")
+    Call<ResponseBody> addCartGoods(@Query("username")String username,@Query("name")String name);
+
+    @GET("/getGoods")
+    Call<GoodsInfo> getGoods(@Query("name")String name);
 
 
 
     //未测
     @POST("/addOrder")
-    Call<ResponseBody> addOrder(@Query("username")String username,@Query("name")String name,@Query("price")double price,@Query("num")int num);
+    Call<ResponseBody> addOrder(@Query("username")String username,@Query("name")String name,@Query("num")int num);
 
     @POST("/getOrderList")
     Call<List<OrderInfo>> getOrderList(@Query("username")String username);
 
-
-    @GET("/getGoodsList")
-    Call<List<GoodsInfo>> getGoodsList();
-
-
-    @POST("/getCart")
-    Call<List<CartGoods>> getCartGoods(@Query("username")String username);
-
-    @POST("/addCartGoods")
-    Call<ResponseBody> addCartGoods(@Query("username")String username,@Query("name")String name);
 }

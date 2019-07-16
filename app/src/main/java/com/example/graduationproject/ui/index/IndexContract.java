@@ -11,6 +11,8 @@ public interface IndexContract  {
     interface  View extends CommView<Presenter>{
 
         void setData(List<GoodsInfo> body);
+
+        void setBanner(List<GoodsInfo> body);
     }
 
 

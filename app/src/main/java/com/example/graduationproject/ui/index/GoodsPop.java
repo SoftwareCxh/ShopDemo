@@ -60,6 +60,7 @@ public class GoodsPop {
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         // lp.y = 20;//设置Dialog距离底部的距离
         lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        lp.height=ViewGroup.LayoutParams.MATCH_PARENT;
         //将属性设置给窗体
         dialogWindow.setAttributes(lp);
         ImageView image=view.findViewById(R.id.image);
@@ -69,16 +70,21 @@ public class GoodsPop {
         final TextView add=view.findViewById(R.id.add);
         ImageHelper.showRoundedImage(mActivity,image, ApiServiceUtil.BaseUrl+goodsInfo.getGoodsImage());
         name.setText(goodsInfo.getGoodsName());
-        price.setText(goodsInfo.getGoodsPrice());
+        price.setText("¥"+goodsInfo.getGoodsPrice());
         resume.setText(goodsInfo.getResume());
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Constant.username==null){
+                    ToastUtils.showShort(mActivity,"请先登录");
+                    return;
+                }
                 ApiServiceUtil.getService().addCartGoods(Constant.username,goodsInfo.getGoodsName()).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
-                            if("1".equals(response.body().string())){
+                            String s=response.body().string();
+                            if("1".equals(s)){
                                 ToastUtils.showShort(mActivity,"添加成功");
                             }
                         } catch (IOException e) {

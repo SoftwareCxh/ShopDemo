@@ -2,10 +2,29 @@ package com.example.graduationproject.data;
 
 public class OrderInfo {
     private long id;
-    private String namme;
+    private String name;
     private String username;
     private double price;
     private int num;
+    private String state;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
 
     public long getId() {
         return id;
@@ -15,12 +34,12 @@ public class OrderInfo {
         this.id = id;
     }
 
-    public String getNamme() {
-        return namme;
+    public String getName() {
+        return name;
     }
 
-    public void setNamme(String namme) {
-        this.namme = namme;
+    public void setName(String namme) {
+        this.name = namme;
     }
 
     public String getUsername() {

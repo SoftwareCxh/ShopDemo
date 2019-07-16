@@ -58,7 +58,7 @@ public class ListAdapter extends BaseAdapter{
         viewHolder.goodsName.setText(goodsInfo.getGoodsName());
         ImageHelper.showRoundedImage(context,viewHolder.goodsImage, ApiServiceUtil.BaseUrl+goodsInfo.getGoodsImage());
         Log.d("Activity",ApiServiceUtil.BaseUrl+goodsInfo.getGoodsImage());
-        viewHolder.goodsPrice.setText(goodsInfo.getGoodsPrice());
+        viewHolder.goodsPrice.setText("¥"+goodsInfo.getGoodsPrice());
         viewHolder.resume.setText(goodsInfo.getResume());
         return convertView;
     }

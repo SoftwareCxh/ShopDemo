@@ -1,53 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/m_main_color"
-        >
+        android:background="@color/m_main_color">
+
         <TextView
             android:id="@+id/cart_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@color/white"
             android:text="@string/cart"
-            android:textSize="18dp"/>
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
         <TextView
             android:id="@+id/actionBar_edit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
             android:text="@string/edit"
-            android:textSize="14dp"
             android:textColor="@color/white"
-            />
+            android:textSize="14dp" />
     </RelativeLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-        <ListView
-            android:id="@+id/goods_list"
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </ListView>
+            <ListView
+                android:id="@+id/goods_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
         android:background="@color/white"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <CheckBox
             android:id="@+id/all_checkBox"
             android:layout_width="0dp"
@@ -63,6 +71,7 @@
             android:minHeight="64dp"
             android:text="@string/all"
             android:textSize="16sp" />
+
         <LinearLayout
             android:id="@+id/order_info"
             android:layout_width="0dp"
@@ -107,6 +116,7 @@
                     android:gravity="right"
                     android:text="不含运费" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/go_pay"
                 android:layout_width="0dp"
@@ -118,6 +128,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/share_info"
             android:layout_width="0dp"

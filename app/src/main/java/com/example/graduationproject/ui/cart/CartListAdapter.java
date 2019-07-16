@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.graduationproject.R;
+import com.example.graduationproject.base.Constant;
 import com.example.graduationproject.data.GoodsInfo;
+import com.example.graduationproject.util.ApiServiceUtil;
 import com.example.graduationproject.util.ImageHelper;
 
 import java.util.List;
@@ -41,7 +43,7 @@ public class CartListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;
         if(convertView==null){
             convertView=View.inflate(context,R.layout.list_item_cart_goods,null);
@@ -52,30 +54,33 @@ public class CartListAdapter extends BaseAdapter {
         }
         final GoodsInfo goodsInfo=list.get(position);
         viewHolder.goodsName.setText(goodsInfo.getGoodsName());
-        ImageHelper.showRoundedImage(context,viewHolder.goodsImage,goodsInfo.getGoodsImage());
-        viewHolder.goodsNum.setText(goodsInfo.getGoodsNum());
-        viewHolder.goodsPrice.setText(goodsInfo.getGoodsPrice());
-        viewHolder.reduceGoodsNum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goodsInfo.reduceNum();
-            }
-        });
-        viewHolder.increaseGoodsNum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goodsInfo.increaseNum();
-            }
-        });
+        ImageHelper.showRoundedImage(context,viewHolder.goodsImage, ApiServiceUtil.BaseUrl+goodsInfo.getGoodsImage());
+        viewHolder.goodsNum.setText(String.valueOf(goodsInfo.getGoodsNum()));
+        viewHolder.goodsPrice.setText("¥"+goodsInfo.getGoodsPrice());
+        viewHolder.singleCheckBox.setChecked(goodsInfo.isChoosed());
         viewHolder.singleCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goodsInfo.setChoosed(((CheckBox) v).isChecked());
                 viewHolder.singleCheckBox.setChecked(((CheckBox) v).isChecked());
-                //checkInterface.checkChild(position, ((CheckBox) v).isChecked());
+                checkInterface.checkChild(position, ((CheckBox) v).isChecked());
             }
         });
 
+        viewHolder.reduceGoodsNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modifyCountInterface.doDecrease(position, viewHolder.goodsNum, viewHolder.singleCheckBox.isChecked());
+
+            }
+        });
+        viewHolder.increaseGoodsNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modifyCountInterface.doIncrease(position, viewHolder.goodsNum, viewHolder.singleCheckBox.isChecked());
+
+            }
+        });
         return convertView;
     }
 
@@ -99,4 +104,52 @@ public class CartListAdapter extends BaseAdapter {
         }
     }
 
+    public interface ModifyCountInterface {
+        /**
+         * 增加操作
+         *
+         * @param childPosition 子元素的位置
+         * @param showCountView 用于展示变化后数量的View
+         * @param isChecked     子元素选中与否
+         */
+        void doIncrease(int childPosition, View showCountView, boolean isChecked);
+
+        void doDecrease(int childPosition, View showCountView, boolean isChecked);
+
+        void doUpdate(int childPosition, View showCountView, boolean isChecked);
+
+        /**
+         * 删除子Item
+         *
+         * @param groupPosition
+         * @param childPosition
+         */
+    }
+    public interface CheckInterface {
+        /**
+         * 子选框状态改变触发的事件
+         *
+         * @param childPosition 子元素的位置
+         * @param isChecked     子元素的选中与否
+         */
+        void checkChild( int childPosition, boolean isChecked);
+    }
+
+    private ModifyCountInterface modifyCountInterface;
+    private CheckInterface checkInterface;
+    public ModifyCountInterface getModifyCountInterface() {
+        return modifyCountInterface;
+    }
+
+    public void setModifyCountInterface(ModifyCountInterface modifyCountInterface) {
+        this.modifyCountInterface = modifyCountInterface;
+    }
+
+    public CheckInterface getCheckInterface() {
+        return checkInterface;
+    }
+
+    public void setCheckInterface(CheckInterface checkInterface) {
+        this.checkInterface = checkInterface;
+    }
 }

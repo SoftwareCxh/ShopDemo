@@ -7,6 +7,24 @@ public class GoodsInfo {
     private double price;
     private int goodsNum = 1;
     private String resume;
+    private int cartId;
+    private String shopName;
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
+    }
 
     public String getResume() {
         return resume;
@@ -26,8 +44,8 @@ public class GoodsInfo {
         isChoosed = choosed;
     }
 
-    public String getGoodsNum() {
-        return String.valueOf(goodsNum);
+    public int getGoodsNum() {
+        return goodsNum;
     }
 
     public void setGoodsNum(int goodsNum) {
@@ -68,8 +86,8 @@ public class GoodsInfo {
         this.image = goodsImage;
     }
 
-    public String getGoodsPrice() {
-        return "¥" + price;
+    public double getGoodsPrice() {
+        return price;
     }
 
     public void setGoodsPrice(double goodsPrice) {
