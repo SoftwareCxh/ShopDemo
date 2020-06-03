@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: :dksdk:@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/dksdk.aar/ddbe4f1e2a587d15000cc4b8987e7913/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/dksdk.aar/ddbe4f1e2a587d15000cc4b8987e7913/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/dksdk.aar/ddbe4f1e2a587d15000cc4b8987e7913/jars/libs/tmsdk.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

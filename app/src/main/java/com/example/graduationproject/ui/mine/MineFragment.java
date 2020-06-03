@@ -12,7 +12,6 @@ import com.example.graduationproject.R;
 import com.example.graduationproject.base.CommFragment;
 import com.example.graduationproject.base.Constant;
 import com.example.graduationproject.ui.LoginActivity;
-import com.youth.banner.loader.ImageLoader;
 
 import butterknife.BindView;
 
